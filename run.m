@@ -29,23 +29,25 @@ serv = serv(serv ~= 0);
 %       matds: matriz de distancias incluyendo deposito y satelites
 
 % Poblacion incial
-scli   = size(init, 1);
-ssat   = size(x, 1) - scli - 1;
-sats   = 1:ssat;
-cdep   = 300;
-csat   = 70*ones(ssat, 1);
-cveh2  = 50;
-cveh1  = 100;
-velp   = 30;
-cost_t2 = 1000;
-cost_t1 = 1500;
-cost_s  = 500;
-pob     = init_pob(scli, npob);
+scli     = size(init, 1);
+ssat     = size(x, 1) - scli - 1;
+sats     = 1:ssat;
+cdep     = 300;
+csat     = 70*ones(ssat, 1);
+cveh2    = 50;
+cveh1    = 100;
+velp     = 30;
+cost_t2  = 1000;
+cost_t1  = 1500;
+cost_s   = 500;
+cost_v2  = 100;
+cost_v1  = 120;
+pob      = init_pob(scli, npob);
 
 % Matrices de distancias
-dmats  = distances_calc(x, y, scli, ssat);
-matsc  = dmats.matsc;
-matds  = dmats.matds;
+dmats    = distances_calc(x, y, scli, ssat);
+matsc    = dmats.matsc;
+matds    = dmats.matds;
 
 %% Evaluacion inicial del problema
 costo_l2 = level2(pob, matsc, dems, init, fini, serv, csat, cveh2, ssat, velp, cost_t2, cost_s);
@@ -57,4 +59,4 @@ for i = 1:scost
     cost_i(i) = sum(costo_l2(i).cost);
     dems_i(i) = sum(costo_l2(i).dems);
 end
-costo_l1 = level1(matds, dems_i, cveh1, cost_t1);
+costo_l1 = level1(matds, dems_i, cveh1, cost_t1, cost_v1);
