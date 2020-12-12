@@ -1,13 +1,9 @@
-close all;
-clear;
-clc;
-
-% Funciones del tabu search
-addpath('./TABU');
-addpath('./Data');
-addpath('./Fitnes');
-addpath('./Genetic');
-
+close all
+clear
+clc
+%% Parametros de corrida:
+%       npob: numero de poblacion inicial
+npob = 100;
 %% Lectura y limpieza de datos de la instancia:
 %       x:    coordenadas en x de deposito, satelites y clientes
 %       y:    coordenadas en y de deposito, satelites y clientes
@@ -23,8 +19,11 @@ init                           = init(init ~= 0);
 fini                           = fini(fini ~= 0);
 dems                           = dems(dems ~= 0);
 serv                           = serv(serv ~= 0);
+
+% Funciones del tabu search
+addpath('./TABU');
+addpath('./Data');
 %% Generacion de poblacion inicial y matrices de distancia
-%       npob: numero de poblacion inicial
 %       scli: tamaño del cromosoma de clientes
 %       ssat: tamaño del vector de satelites
 %       sats: vector de satelites
@@ -32,9 +31,7 @@ serv                           = serv(serv ~= 0);
 %       matsc: matriz de distancias incluyendo satelites y clientes
 %       matds: matriz de distancias incluyendo deposito y satelites
 
-% Parametros de corrida:
-
-npob                           = 100;
+% Poblacion incial
 scli                           = size(init, 1);
 ssat                           = size(x, 1) - scli - 1;
 sats                           = 1:ssat;
@@ -49,8 +46,8 @@ cost_s                         = 500;
 cost_v2                        = 100;
 cost_v1                        = 120;
 pob                            = init_pob(scli, npob);
-nsel                           = 0.5; % Porcentaje de cromosomas seleccionados
-nswap                          = 0.7; % Porcentaje de genes que cambian
+nsel                           = 0.5;
+nswap                          = 0.7;
 % Matrices de distancias
 dmats                          = distances_calc(x, y, scli, ssat);
 matsc                          = dmats.matsc;
@@ -71,7 +68,5 @@ end
 selected                       = selection_ext(pob, nsel);
 crossed                        = crossover_ext(selected);
 mutated                        = mutation(crossed, nswap);
-tabued_l1                      = ts(x(2:4), y(2:4));
-tabued_l2                      = ts(x(5:end), y(5:end));
-disp('costo total:')
-tabued_l1.Cost+tabued_l2.Cost
+xc                             = 
+tabued                         = ts(x(4:), y(4:));

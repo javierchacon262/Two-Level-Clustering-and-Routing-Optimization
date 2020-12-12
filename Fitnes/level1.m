@@ -15,7 +15,7 @@ while i <= ss
         costo.cost      = [costo.cost, dist*cost_t];
         vis             = [vis, costo.ruta(end)+1];
         cap             = cap - dems(i);
-        i               = i + 1;        
+        i               = i + 1;
     else
         cap             = cveh1;
         vehs            = vehs + 1;
